@@ -45,13 +45,18 @@
             <span class="close-btn">&times;</span>
             <h2>Upload a File</h2>
             <div class="drop-zone" id="dropZone">
-                <p>Drag file here or</p>
+                <p id="dropZoneText">Drag file here or</p>
                 <input type="file" id="actualFileInput" class="hidden-input">
                 <button id="browseBtn" class="btn secondary-btn outline">Browse file</button>
             </div>
         </div>
     </div>
 
+    <!-- Firebase App and Storage (v8 for local file compatibility) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+    <script src="firebase.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
