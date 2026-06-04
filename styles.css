@@ -1,0 +1,230 @@
+:root {
+    --bg-color: #0A192F;
+    --card-bg: #112240;
+    --text-main: #CCD6F6;
+    --text-muted: #8892B0;
+    --primary-color: #64FFDA;
+    --primary-hover: #52e0c2;
+    --input-bg: #0A192F;
+    --border-color: #233554;
+    --modal-bg: rgba(10, 25, 47, 0.85);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+input[type="text"] {
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-bottom: 0.75rem;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-muted);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: var(--border-color);
+    color: var(--text-main);
+}
+
+.secondary-btn:hover {
+    background-color: #2e4369;
+    transform: translateY(-2px);
+}
+
+.secondary-btn.outline {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.secondary-btn.outline:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+/* QR Container */
+.qr-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.download-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+select {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--text-main);
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: var(--primary-color);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--modal-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--primary-color);
+}
+
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.drop-zone.dragover {
+    border-color: var(--primary-color);
+    background-color: rgba(100, 255, 218, 0.05);
+}
+
+.drop-zone p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.hidden-input {
+    display: none;
+}
