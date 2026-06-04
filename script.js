@@ -12,22 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadModal = document.getElementById('uploadModal');
     const closeBtn = document.querySelector('.close-btn');
     const dropZone = document.getElementById('dropZone');
+    const dropZoneText = document.getElementById('dropZoneText');
     const browseBtn = document.getElementById('browseBtn');
     const actualFileInput = document.getElementById('actualFileInput');
     
     const downloadBtn = document.getElementById('downloadBtn');
     const downloadFormat = document.getElementById('downloadFormat');
 
+    // Reference to Firebase storage (initialized in firebase.js)
+    const storage = firebase.storage();
+
     let qrcode = null;
 
-    // Generate QR Code from Link
-    generateBtn.addEventListener('click', () => {
-        const url = linkInput.value.trim();
-        if (!url) {
-            alert('Please enter a valid URL.');
-            return;
-        }
-
+    function generateQRCode(url) {
         // Clear previous QR code
         qrcodeDiv.innerHTML = '';
         qrWrapper.classList.remove('hidden');
@@ -40,6 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
         });
+    }
+
+    // Generate QR Code from Link
+    generateBtn.addEventListener('click', () => {
+        const url = linkInput.value.trim();
+        if (!url) {
+            alert('Please enter a valid URL.');
+            return;
+        }
+        generateQRCode(url);
     });
 
     // Download Logic
@@ -132,13 +139,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function handleFiles(files) {
+    async function handleFiles(files) {
         const file = files[0];
         if (file) {
             fileInputDisplay.value = file.name;
-            closeModal();
-            // Since we are frontend only for now, we'll just show an alert or set up mock state
-            alert(`File "${file.name}" selected. To generate a QR code for a file, it needs to be uploaded to a server to get a URL.`);
+            
+            // Show upload state
+            const originalText = dropZoneText.innerText;
+            dropZoneText.innerText = "Uploading to Firebase...";
+            browseBtn.disabled = true;
+
+            try {
+                // Upload to Firebase Storage
+                const storageRef = storage.ref();
+                const fileRef = storageRef.child('uploads/' + Date.now() + '_' + file.name);
+                const snapshot = await fileRef.put(file);
+                
+                // Get the public download URL
+                const downloadURL = await snapshot.ref.getDownloadURL();
+                
+                // Update link input so user sees where the QR points
+                linkInput.value = downloadURL;
+                
+                // Generate QR
+                generateQRCode(downloadURL);
+                
+                closeModal();
+            } catch (error) {
+                console.error("Upload failed:", error);
+                alert("Upload failed. Make sure your Firebase Storage rules allow public reads/writes (Test Mode).");
+            } finally {
+                // Restore state
+                dropZoneText.innerText = originalText;
+                browseBtn.disabled = false;
+            }
         }
     }
 });
