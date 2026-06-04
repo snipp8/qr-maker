@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,54 +10,18 @@
     <!-- Include qrcode.js for display -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>QR Code Maker</h1>
-        
+
         <div class="input-group">
             <label for="linkInput">Link</label>
             <input type="text" id="linkInput" placeholder="Enter URL here (e.g. https://example.com)">
             <button id="generateBtn" class="btn primary-btn">Generate QR</button>
         </div>
 
-        <div class="input-group">
-            <label for="fileInputDisplay">File</label>
-            <input type="text" id="fileInputDisplay" placeholder="No file chosen" readonly>
-            <button id="openModalBtn" class="btn secondary-btn">Upload Files</button>
-        </div>
-
-        <div id="qrWrapper" class="hidden" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-top: 2rem;">
-            <div id="qrCodeContainer" class="qr-container">
-                <div id="qrcode"></div>
-            </div>
-            <div class="download-section">
-                <select id="downloadFormat">
-                    <option value="png">PNG</option>
-                    <option value="svg">SVG (Vector)</option>
-                </select>
-                <button id="downloadBtn" class="btn primary-btn">Download</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Overlay -->
-    <div id="uploadModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Upload a File</h2>
-            <div class="drop-zone" id="dropZone">
-                <p id="dropZoneText">Drag file here or</p>
-                <input type="file" id="actualFileInput" class="hidden-input">
-                <button id="browseBtn" class="btn secondary-btn outline">Browse file</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase App and Storage (v8 for local file compatibility) -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
-
-    <script src="firebase.js"></script>
-    <script src="script.js"></script>
+        <script src="script.js"></script>
 </body>
+
 </html>

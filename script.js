@@ -19,9 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.getElementById('downloadBtn');
     const downloadFormat = document.getElementById('downloadFormat');
 
-    // Reference to Firebase storage (initialized in firebase.js)
-    const storage = firebase.storage();
-
     let qrcode = null;
 
     function generateQRCode(url) {
@@ -139,40 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    async function handleFiles(files) {
+    function handleFiles(files) {
         const file = files[0];
         if (file) {
             fileInputDisplay.value = file.name;
-            
-            // Show upload state
-            const originalText = dropZoneText.innerText;
-            dropZoneText.innerText = "Uploading to Firebase...";
-            browseBtn.disabled = true;
-
-            try {
-                // Upload to Firebase Storage
-                const storageRef = storage.ref();
-                const fileRef = storageRef.child('uploads/' + Date.now() + '_' + file.name);
-                const snapshot = await fileRef.put(file);
-                
-                // Get the public download URL
-                const downloadURL = await snapshot.ref.getDownloadURL();
-                
-                // Update link input so user sees where the QR points
-                linkInput.value = downloadURL;
-                
-                // Generate QR
-                generateQRCode(downloadURL);
-                
-                closeModal();
-            } catch (error) {
-                console.error("Upload failed:", error);
-                alert("Upload failed. Make sure your Firebase Storage rules allow public reads/writes (Test Mode).");
-            } finally {
-                // Restore state
-                dropZoneText.innerText = originalText;
-                browseBtn.disabled = false;
-            }
+            closeModal();
+            alert(`File "${file.name}" selected.\n\nTo generate a QR code for this file, please upload it to Google Drive or Dropbox, copy the "Share" link, and paste it directly into the "Link" input field above.`);
         }
     }
 });
