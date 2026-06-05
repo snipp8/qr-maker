@@ -5,17 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const qrWrapper = document.getElementById('qrWrapper');
     const qrCodeContainer = document.getElementById('qrCodeContainer');
     const qrcodeDiv = document.getElementById('qrcode');
-    
+
     const fileInputDisplay = document.getElementById('fileInputDisplay');
     const openModalBtn = document.getElementById('openModalBtn');
-    
+
     const uploadModal = document.getElementById('uploadModal');
     const closeBtn = document.querySelector('.close-btn');
     const dropZone = document.getElementById('dropZone');
     const dropZoneText = document.getElementById('dropZoneText');
     const browseBtn = document.getElementById('browseBtn');
     const actualFileInput = document.getElementById('actualFileInput');
-    
+
     const downloadBtn = document.getElementById('downloadBtn');
     const downloadFormat = document.getElementById('downloadFormat');
 
@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
             text: url,
             width: 200,
             height: 200,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
         });
     }
 
@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadBtn.addEventListener('click', async () => {
         const url = linkInput.value.trim();
         if (!url) return;
-        
+
         const format = downloadFormat.value;
-        
+
         // Dynamically import the advanced qrcode library for downloads
         const QRCodeModule = await import('https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm');
         const qrcodeLib = QRCodeModule.default;
-        
+
         if (format === 'png') {
             qrcodeLib.toDataURL(url, {
                 width: 1000,
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 color: { dark: '#000000ff', light: '#ffffffff' }
             }, function (err, string) {
                 if (err) return console.error(err);
-                const blob = new Blob([string], {type: 'image/svg+xml;charset=utf-8'});
+                const blob = new Blob([string], { type: 'image/svg+xml;charset=utf-8' });
                 const svgUrl = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.download = 'qrcode.svg';
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     closeBtn.addEventListener('click', closeModal);
-    
+
     // Close on outside click
     uploadModal.addEventListener('click', (e) => {
         if (e.target === uploadModal) {

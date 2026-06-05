@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Maker</title>
+    <meta name="description" content="Instantly generate QR codes from links or files. Download as PNG or SVG.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Include qrcode.js for display -->
@@ -15,13 +16,29 @@
     <div class="container">
         <h1>QR Code Maker</h1>
 
+        <!-- Link Input -->
         <div class="input-group">
             <label for="linkInput">Link</label>
             <input type="text" id="linkInput" placeholder="Enter URL here (e.g. https://example.com)">
             <button id="generateBtn" class="btn primary-btn">Generate QR</button>
         </div>
 
-        <script src="script.js"></script>
+        <!-- QR Code Output -->
+        <div id="qrWrapper" class="hidden">
+            <div id="qrCodeContainer" class="qr-container">
+                <div id="qrcode"></div>
+            </div>
+            <div class="download-section">
+                <select id="downloadFormat">
+                    <option value="png">PNG</option>
+                    <option value="svg">SVG (Vector)</option>
+                </select>
+                <button id="downloadBtn" class="btn primary-btn">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
