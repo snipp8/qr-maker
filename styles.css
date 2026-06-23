@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #0A192F;
-    --card-bg: #112240;
+    --bg-color: #290a2f;
+    --card-bg: #351140;
     --text-main: #CCD6F6;
     --text-muted: #8892B0;
-    --primary-color: #64FFDA;
-    --primary-hover: #52e0c2;
-    --input-bg: #0A192F;
-    --border-color: #233554;
+    --primary-color: #f764ff;
+    --primary-hover: #b552e0;
+    --input-bg: #280a2f;
+    --border-color: #472354;
     --modal-bg: rgba(10, 25, 47, 0.85);
 }
 
@@ -47,6 +47,55 @@ h1 {
     margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.radio-label input[type="radio"] {
+    accent-color: var(--primary-color);
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
 }
 
 label {
@@ -122,7 +171,11 @@ input[type="text"]::placeholder {
     display: flex;
     justify-content: center;
     padding: 1rem;
-    background-color: white;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0),
+        linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%, #e0e0e0);
+    background-size: 50px 50px;
+    background-position: 0 0, 10px 10px;
     border-radius: 8px;
     width: fit-content;
     margin: 20px auto;

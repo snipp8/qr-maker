@@ -8,6 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadFormat = document.getElementById('downloadFormat');
     const clearBtn = document.getElementById('clearBtn');
 
+    const bgDesignRadios = document.querySelectorAll('input[name="bgDesign"]');
+    const colorPickerWrapper = document.getElementById('colorPickerWrapper');
+    const bgColorPicker = document.getElementById('bgColorPicker');
+
+    bgDesignRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            if (e.target.value === 'color') {
+                colorPickerWrapper.classList.remove('hidden');
+            } else {
+                colorPickerWrapper.classList.add('hidden');
+            }
+        });
+    });
+
+    function getLightColor(forDownload = false) {
+        const selectedBg = document.querySelector('input[name="bgDesign"]:checked').value;
+        if (selectedBg === 'transparent') {
+            return forDownload ? '#00000000' : '#0000';
+        } else {
+            return forDownload ? bgColorPicker.value + 'ff' : bgColorPicker.value;
+        }
+    }
+
     // Load the qrcode library once and reuse for both display and download
     let qrcodeLib = null;
     async function getLib() {
@@ -41,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lib.toCanvas(canvas, url, {
             width: 200,
             margin: 1,
-            color: { dark: '#000000', light: '#ffffff' }
+            color: { dark: '#000000', light: getLightColor() }
         }, (err) => {
             if (err) {
                 console.error('QR generation error:', err);
@@ -92,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lib.toDataURL(url, {
                 width: 1000,
                 margin: 2,
-                color: { dark: '#000000ff', light: '#ffffffff' }
+                color: { dark: '#000000ff', light: getLightColor(true) }
             }, (err, dataUrl) => {
                 if (err) return console.error(err);
                 const link = document.createElement('a');
@@ -105,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: 'svg',
                 width: 1000,
                 margin: 2,
-                color: { dark: '#000000ff', light: '#ffffffff' }
+                color: { dark: '#000000ff', light: getLightColor(true) }
             }, (err, string) => {
                 if (err) return console.error(err);
                 const blob = new Blob([string], { type: 'image/svg+xml;charset=utf-8' });
