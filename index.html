@@ -29,7 +29,24 @@
             <label for="linkInput">Link</label>
             <input type="text" id="linkInput" placeholder="Enter URL here (e.g. https://example.com)" maxlength="2048"
                 autocomplete="off" spellcheck="false">
-            <button id="generateBtn" class="btn primary-btn">Generate QR</button>
+        </div>
+
+        <!-- Design Options -->
+        <div class="input-group design-options">
+            <label>Background Design</label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" name="bgDesign" value="transparent" checked> Transparent
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="bgDesign" value="color"> Solid Color
+                </label>
+            </div>
+            <div id="colorPickerWrapper" class="color-picker-wrapper hidden">
+                <label for="bgColorPicker">Background Color:</label>
+                <input type="color" id="bgColorPicker" value="#ffffff">
+            </div>
+            <button id="generateBtn" class="btn primary-btn" style="margin-top: 1rem;">Generate QR</button>
         </div>
 
         <!-- QR Code Output -->
