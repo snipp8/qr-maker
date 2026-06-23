@@ -286,3 +286,9 @@ select:focus {
 .hidden-input {
     display: none;
 }
+
+.generateBtn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}

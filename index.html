@@ -24,14 +24,14 @@
     <div class="container">
         <h1>QR Code Generator</h1>
 
-        <!-- Link Input -->
+        <!-- Link field -->
         <div class="input-group">
             <label for="linkInput">Link</label>
             <input type="text" id="linkInput" placeholder="Enter URL here (e.g. https://example.com)" maxlength="2048"
                 autocomplete="off" spellcheck="false">
         </div>
 
-        <!-- QR Code Output -->
+        <!-- QR Code will be here -->
         <div id="qrWrapper" class="hidden">
             <div id="qrCodeContainer" class="qr-container">
                 <div id="qrcode"></div>
@@ -45,11 +45,12 @@
                 <button id="clearBtn" class="btn secondary-btn">Clear</button>
             </div>
 
+            <!-- Background colour -->
             <div class="input-group design-options">
-                <label>Background Design</label>
+                <h4>QR Code Design</h4>
                 <div class="radio-group">
                     <label class="radio-label">
-                        <input type="radio" name="bgDesign" value="transparent" checked> Transparent
+                        <input type="radio" name="bgDesign" value="transparent" checked> Transparent Background
                     </label>
                     <label class="radio-label">
                         <input type="radio" name="bgDesign" value="color"> Solid Color
@@ -59,9 +60,15 @@
                     <label for="bgColorPicker">Background Color:</label>
                     <input type="color" id="bgColorPicker" value="#ffffff">
                 </div>
+                <div id="qr-colorPickerWrapper" class="color-picker-wrapper hidden">
+                    <label for="qrColorPicker">QR Code Color:</label>
+                    <input type="color" id="qrColorPicker" value="#000000">
+                </div>
             </div>
         </div>
-        <button id="generateBtn" class="btn primary-btn">Generate QR</button>
+        <div class="generateBtn-wrapper">
+            <button id="generateBtn" class="btn primary-btn">Generate QR</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

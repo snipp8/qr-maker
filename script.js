@@ -10,20 +10,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bgDesignRadios = document.querySelectorAll('input[name="bgDesign"]');
     const colorPickerWrapper = document.getElementById('colorPickerWrapper');
+    const qrColorPickerWrapper = document.getElementById('qr-colorPickerWrapper');
     const bgColorPicker = document.getElementById('bgColorPicker');
+    const qrColorPicker = document.getElementById('qrColorPicker');
 
     bgDesignRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
             if (e.target.value === 'color') {
                 colorPickerWrapper.classList.remove('hidden');
+                qrColorPickerWrapper.classList.remove('hidden');
             } else {
                 colorPickerWrapper.classList.add('hidden');
+                qrColorPickerWrapper.classList.add('hidden');
             }
             updateQRCodeIfVisible();
         });
     });
 
     bgColorPicker.addEventListener('input', updateQRCodeIfVisible);
+    qrColorPicker.addEventListener('input', updateQRCodeIfVisible);
 
     async function updateQRCodeIfVisible() {
         if (!qrWrapper.classList.contains('hidden')) {
@@ -42,6 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             return forDownload ? bgColorPicker.value + 'ff' : bgColorPicker.value;
         }
+    }
+
+    function getDarkColor(forDownload = false) {
+        return forDownload ? qrColorPicker.value + 'ff' : qrColorPicker.value;
     }
 
     // Load the qrcode library once and reuse for both display and download
@@ -77,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lib.toCanvas(canvas, url, {
             width: 200,
             margin: 1,
-            color: { dark: '#000000', light: getLightColor() }
+            color: { dark: getDarkColor(), light: getLightColor() }
         }, (err) => {
             if (err) {
                 console.error('QR generation error:', err);
@@ -128,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lib.toDataURL(url, {
                 width: 1000,
                 margin: 2,
-                color: { dark: '#000000ff', light: getLightColor(true) }
+                color: { dark: getDarkColor(true), light: getLightColor(true) }
             }, (err, dataUrl) => {
                 if (err) return console.error(err);
                 const link = document.createElement('a');
@@ -141,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: 'svg',
                 width: 1000,
                 margin: 2,
-                color: { dark: '#000000ff', light: getLightColor(true) }
+                color: { dark: getDarkColor(true), light: getLightColor(true) }
             }, (err, string) => {
                 if (err) return console.error(err);
                 const blob = new Blob([string], { type: 'image/svg+xml;charset=utf-8' });
