@@ -31,24 +31,6 @@
                 autocomplete="off" spellcheck="false">
         </div>
 
-        <!-- Design Options -->
-        <div class="input-group design-options">
-            <label>Background Design</label>
-            <div class="radio-group">
-                <label class="radio-label">
-                    <input type="radio" name="bgDesign" value="transparent" checked> Transparent
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="bgDesign" value="color"> Solid Color
-                </label>
-            </div>
-            <div id="colorPickerWrapper" class="color-picker-wrapper hidden">
-                <label for="bgColorPicker">Background Color:</label>
-                <input type="color" id="bgColorPicker" value="#ffffff">
-            </div>
-            <button id="generateBtn" class="btn primary-btn" style="margin-top: 1rem;">Generate QR</button>
-        </div>
-
         <!-- QR Code Output -->
         <div id="qrWrapper" class="hidden">
             <div id="qrCodeContainer" class="qr-container">
@@ -62,7 +44,24 @@
                 <button id="downloadBtn" class="btn primary-btn">Download</button>
                 <button id="clearBtn" class="btn secondary-btn">Clear</button>
             </div>
+
+            <div class="input-group design-options">
+                <label>Background Design</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="bgDesign" value="transparent" checked> Transparent
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="bgDesign" value="color"> Solid Color
+                    </label>
+                </div>
+                <div id="colorPickerWrapper" class="color-picker-wrapper hidden">
+                    <label for="bgColorPicker">Background Color:</label>
+                    <input type="color" id="bgColorPicker" value="#ffffff">
+                </div>
+            </div>
         </div>
+        <button id="generateBtn" class="btn primary-btn">Generate QR</button>
     </div>
 
     <script src="script.js"></script>

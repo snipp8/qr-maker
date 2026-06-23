@@ -191,6 +191,7 @@ input[type="text"]::placeholder {
     align-items: center;
     width: 100%;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 select {

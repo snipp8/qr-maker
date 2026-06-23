@@ -19,8 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 colorPickerWrapper.classList.add('hidden');
             }
+            updateQRCodeIfVisible();
         });
     });
+
+    bgColorPicker.addEventListener('input', updateQRCodeIfVisible);
+
+    async function updateQRCodeIfVisible() {
+        if (!qrWrapper.classList.contains('hidden')) {
+            const url = linkInput.value.trim();
+            if (url && isSafeURL(url)) {
+                // Generate QR without changing button text since it's immediate feedback
+                await generateQRCode(url);
+            }
+        }
+    }
 
     function getLightColor(forDownload = false) {
         const selectedBg = document.querySelector('input[name="bgDesign"]:checked').value;
